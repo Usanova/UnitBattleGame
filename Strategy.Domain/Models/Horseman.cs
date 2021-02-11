@@ -7,9 +7,9 @@
     {
         public Horseman(Player player) : base(player, health: 200) { }
 
-        protected override int maximumTravelDistance => 10;
+        public override int MaximumTravelDistance => 10;
 
-        protected override int shotRange => 1;
+        public override int ShotRange => 1;
 
         protected override int attackPower => 75;
 

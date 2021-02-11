@@ -13,14 +13,14 @@ namespace Strategy.Domain.Models
         protected Unit(Player player, int health) : base(GameObjectType.Unit)
         {
             Player = player;
-            health = health;
+            this.Health = health;
         }
 
         public Player Player { get; private set; }
 
-        protected abstract int maximumTravelDistance { get; }
+        public abstract int MaximumTravelDistance { get; }
 
-        protected abstract int shotRange { get; }
+        public abstract int ShotRange { get; }
 
         protected abstract int attackPower { get; }
 
@@ -28,11 +28,11 @@ namespace Strategy.Domain.Models
 
         private string deathSourcePath => "Resources/Units/Dead.png";
 
-        private int health;
+        public int Health { get; private set; }
 
-        public bool IsDead => health == 0;
+        public bool IsDead => Health == 0;
 
-        public bool CanMove(int x, int y) => Distance(x, X) <= maximumTravelDistance && Distance(y, Y) <= maximumTravelDistance;
+        public bool CanMove(int x, int y) => Distance(x, X) <= MaximumTravelDistance && Distance(y, Y) <= MaximumTravelDistance;
 
         public void Move(int x, int y)
         {
@@ -42,21 +42,16 @@ namespace Strategy.Domain.Models
 
         public void ReduceHealth(int healthReductionAmount)
         {
-            health = Math.Max(health - healthReductionAmount, 0);
+            Health = Math.Max(Health - healthReductionAmount, 0);
         }
 
-        public bool CanAttackUnit(Unit otherUnit) => InRegion(otherUnit, shotRange);
+        public bool CanAttackUnit(Unit otherUnit) => InRegion(otherUnit, ShotRange);
         public abstract int GetAttackPower(Unit otherUnit);
 
         protected bool IsUnitNearby(Unit otherUnit) => InRegion(otherUnit, 1);
 
-        public override ImageSource GetSourceFrom() 
-        {
-            if(IsDead)
-                return new BitmapImage(new Uri(deathSourcePath, UriKind.Relative));
-
-            return new BitmapImage(new Uri(sourcePath, UriKind.Relative)); 
-        }
+        public override BitmapImage SourceFrom => IsDead ? new BitmapImage(new Uri(deathSourcePath, UriKind.Relative))
+            : new BitmapImage(new Uri(sourcePath, UriKind.Relative));
 
         protected int Distance(int firstPoint, int secondPoint) => Math.Abs(firstPoint - secondPoint);
 

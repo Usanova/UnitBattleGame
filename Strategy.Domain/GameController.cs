@@ -98,6 +98,6 @@ namespace Strategy.Domain
         /// <summary>
         /// Получить изображение объекта.
         /// </summary>
-        public ImageSource GetObjectSource(GameObject gameObject) => gameObject.GetSourceFrom();
+        public ImageSource GetObjectSource(GameObject gameObject) => gameObject.SourceFrom;
     }
 }

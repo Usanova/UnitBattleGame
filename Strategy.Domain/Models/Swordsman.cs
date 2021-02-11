@@ -7,9 +7,9 @@
     {
         public Swordsman(Player player) : base(player, health: 100) { }
 
-        protected override int maximumTravelDistance => 5;
+        public override int MaximumTravelDistance => 5;
 
-        protected override int shotRange => 1;
+        public override int ShotRange => 1;
 
         protected override int attackPower => 50;
 

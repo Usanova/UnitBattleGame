@@ -8,9 +8,9 @@
     {
         public Archer(Player player) : base(player, health: 50) { }
 
-        protected override int maximumTravelDistance => 3;
+        public override int MaximumTravelDistance => 3;
 
-        protected override int shotRange => 5;
+        public override int ShotRange => 5;
 
         protected override int attackPower => 50;
 

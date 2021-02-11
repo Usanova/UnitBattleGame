@@ -11,7 +11,7 @@ namespace Strategy.Domain.Models
     {
         public Water() : base(type: GameObjectType.Water) { }
 
-        public override ImageSource GetSourceFrom()
+        public override BitmapImage SourceFrom
             => new BitmapImage(new Uri("Resources/Ground/Water.png", UriKind.Relative));
     }
 }

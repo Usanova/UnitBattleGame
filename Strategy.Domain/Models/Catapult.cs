@@ -7,9 +7,9 @@
     {
         public Catapult(Player player) : base(player, health: 75) { }
 
-        protected override int maximumTravelDistance => 1;
+        public override int MaximumTravelDistance => 1;
 
-        protected override int shotRange => 10;
+        public override int ShotRange => 10;
 
         protected override int attackPower => 100;
 

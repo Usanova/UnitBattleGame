@@ -8,40 +8,62 @@ namespace Strategy.Domain.Models
     /// </summary>
     public sealed class Map
     {
-        private Matrix gameMatrix = new Matrix();
+        private Matrix groundMatrix = new Matrix();
+
+        private Matrix unitMatrix = new Matrix();
 
         /// <inheritdoc />
         public Map(IReadOnlyList<GameObject> ground, IReadOnlyList<GameObject> units)
         {
             if(ground != null)
                 foreach (var gameObject in ground)
-                    if(gameObject.Type == GameObjectType.Water)
-                        gameMatrix[gameObject.X,gameObject.Y] = gameObject;
+                    groundMatrix[gameObject.X,gameObject.Y] = gameObject;
 
             if (units != null)
                 foreach (var gameObject in units)
-                    gameMatrix[gameObject.X, gameObject.Y] = gameObject;
+                    unitMatrix[gameObject.X, gameObject.Y] = gameObject;
         }
 
         public void Move(Unit unit, int x, int y)
         {
-            gameMatrix[unit.X, unit.Y] = null;
+            unitMatrix[unit.X, unit.Y] = null;
 
             unit.Move(x, y);
-            gameMatrix[x, y] = unit;
-
+            unitMatrix[x, y] = unit;
         }
 
-        public GameObjectType GetGameObjectTypeByCoordinates(int x, int y)
+        public GameObject GetGameObjectByCoordinates(int x, int y)
         {
-            if(gameMatrix[x, y] == null)
-            {
-                return GameObjectType.Grass;
-            }
+            if(unitMatrix[x, y] != null)
+                return unitMatrix[x, y];
+            if(groundMatrix[x,y] != null)
+                return groundMatrix[x, y];
 
-            return gameMatrix[x, y].Type;
+            return null;
+        }
+
+        public void SelectMovingArea(Unit unit) => ChangeMovingArea(unit, true);
+
+        public void UnselectMovingArea(Unit unit) => ChangeMovingArea(unit, false);
+
+        private void ChangeMovingArea(Unit unit, bool isMovingArea)
+        {
+            for (int i = Math.Max(0, unit.X - unit.MaximumTravelDistance);
+                i <= Math.Min(19, unit.X + unit.MaximumTravelDistance); i++)
+            {
+                for (int j = Math.Max(0, unit.Y - unit.MaximumTravelDistance);
+                j <= Math.Min(19, unit.Y + unit.MaximumTravelDistance); j++)
+                {
+                    if (i == unit.X && j == unit.Y)
+                        continue;
+
+                    groundMatrix[i, j].IsMovingArea = isMovingArea;
+                }
+            }
         }
     }
+
+
 
     internal class Matrix
     {

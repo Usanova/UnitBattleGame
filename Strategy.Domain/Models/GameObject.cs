@@ -12,36 +12,22 @@ namespace Strategy.Domain.Models
 {
     public abstract class GameObject : ReactiveObject
     {
-        protected GameObject(GameObjectType type)
+        protected GameObject(int x, int y)
         {
-            Type = type;
+            X = x;
+            Y = y;
         }
 
-        public GameObjectType Type { get; protected set; }
-        /// <summary>
-        /// Координата x травы на карте.
-        /// </summary>
-        [Reactive] public int X { get; set; }
+        [Reactive] public int X { get; protected set; }
 
-        /// <summary>
-        /// Координата y травы на карте.
-        /// </summary>
-        [Reactive] public int Y { get; set; }
+        [Reactive] public int Y { get; protected set; }
 
         [Reactive] public bool Selected { get; private set; }
 
+        [Reactive] public bool IsMovingArea { get; set; }
+
         public abstract BitmapImage SourceFrom { get; }
 
-        public void ChageSelected()
-        {
-            Selected = !Selected;
-        }
-    }
-
-    public enum GameObjectType
-    {
-        Unit,
-        Grass,
-        Water
+        public void IsSelected(bool isSelected) => Selected = isSelected;
     }
 }

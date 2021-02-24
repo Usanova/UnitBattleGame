@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +12,10 @@ namespace Strategy.Domain.Models
 {
     public abstract class Unit : GameObject
     {
-        protected Unit(Player player, int health) : base(GameObjectType.Unit)
+        protected Unit(int health, Player player, int x, int y): base(x, y)
         {
-            Player = player;
             this.Health = health;
+            Player = player;
         }
 
         public Player Player { get; private set; }
@@ -26,9 +28,17 @@ namespace Strategy.Domain.Models
 
         protected abstract string sourcePath { get; }
 
-        private string deathSourcePath => "Resources/Units/Dead.png";
+        private string deathSourcePath => "Resources/Units/Death.png";
 
-        public int Health { get; private set; }
+        private int health;
+        public int Health { get => health;
+            private set
+            {
+                health = value;
+                this.RaisePropertyChanged("IsDead");
+                this.RaisePropertyChanged("SourceFrom");
+            } 
+        }
 
         public bool IsDead => Health == 0;
 
@@ -48,14 +58,26 @@ namespace Strategy.Domain.Models
         public bool CanAttackUnit(Unit otherUnit) => InRegion(otherUnit, ShotRange);
         public abstract int GetAttackPower(Unit otherUnit);
 
+        public override BitmapImage SourceFrom => IsDead ? new BitmapImage(new Uri(deathSourcePath, UriKind.Relative))
+              : new BitmapImage(new Uri(sourcePath, UriKind.Relative));
+
         protected bool IsUnitNearby(Unit otherUnit) => InRegion(otherUnit, 1);
 
-        public override BitmapImage SourceFrom => IsDead ? new BitmapImage(new Uri(deathSourcePath, UriKind.Relative))
-            : new BitmapImage(new Uri(sourcePath, UriKind.Relative));
+        protected bool InRegion(Unit otherUnit, int regionSize)
+            => Distance(otherUnit.X, X) <= regionSize && Distance(otherUnit.Y, Y) <= regionSize;
 
         protected int Distance(int firstPoint, int secondPoint) => Math.Abs(firstPoint - secondPoint);
 
-        protected bool InRegion(Unit otherUnit, int regionSize) 
-            => Distance(otherUnit.X, X) <= regionSize && Distance(otherUnit.Y, Y) <= regionSize;
+        public static bool TryParse(GameObject gameObject, out Unit unit)
+        {
+            unit = null;
+
+            if (!(gameObject is Unit))
+                return false;
+
+            unit = (Unit)gameObject;
+
+            return true;
+        }
     }
 }

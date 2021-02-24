@@ -5,7 +5,7 @@
     /// </summary>
     public sealed class Catapult : Unit
     {
-        public Catapult(Player player) : base(player, health: 75) { }
+        public Catapult(Player player, int x, int y) : base(health: 75, player, x, y) { }
 
         public override int MaximumTravelDistance => 1;
 

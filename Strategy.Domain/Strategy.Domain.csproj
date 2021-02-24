@@ -51,6 +51,9 @@
     <Reference Include="ReactiveUI.Fody.Helpers, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveUI.Fody.11.5.26\lib\net461\ReactiveUI.Fody.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI.Wpf, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveUI.WPF.13.1.1\lib\net461\ReactiveUI.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.10.0.1\lib\net461\Splat.dll</HintPath>
     </Reference>

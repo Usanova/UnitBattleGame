@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy.Domain", "Strategy.Domain\Strategy.Domain.csproj", "{D971ADB5-5006-4805-8BCE-8D3BFB203D14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy.Domain.Tests", "Strategy.Domain.Tests\Strategy.Domain.Tests.csproj", "{0CB87497-492B-4C70-8E74-EA3C54D3737B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitBattleGame", "UnitBattleGame\UnitBattleGame.csproj", "{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitBattleGame", "UnitBattleGame\UnitBattleGame.csproj", "{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy.Domain.Tests", "Strategy.Domain.Tests\Strategy.Domain.Tests.csproj", "{0CB87497-492B-4C70-8E74-EA3C54D3737B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{D971ADB5-5006-4805-8BCE-8D3BFB203D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D971ADB5-5006-4805-8BCE-8D3BFB203D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D971ADB5-5006-4805-8BCE-8D3BFB203D14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9540AB64-1C0B-4BF9-8033-E03C71C71BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CB87497-492B-4C70-8E74-EA3C54D3737B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

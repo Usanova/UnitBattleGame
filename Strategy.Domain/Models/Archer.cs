@@ -6,7 +6,7 @@
 
     public sealed class Archer : Unit
     {
-        public Archer(Player player) : base(player, health: 50) { }
+        public Archer(Player player, int x, int y) : base(health: 50, player, x, y) { }
 
         public override int MaximumTravelDistance => 3;
 

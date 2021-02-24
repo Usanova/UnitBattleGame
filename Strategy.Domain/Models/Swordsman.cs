@@ -5,7 +5,7 @@
     /// </summary>
     public sealed class Swordsman : Unit
     {
-        public Swordsman(Player player) : base(player, health: 100) { }
+        public Swordsman(Player player, int x, int y) : base(health: 100, player, x, y) { }
 
         public override int MaximumTravelDistance => 5;
 

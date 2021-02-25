@@ -10,6 +10,7 @@ using DevExpress.Mvvm;
 using System.Collections.ObjectModel;
 using Strategy.Domain;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace UnitBattleGame.ViewModels
 {
@@ -19,12 +20,17 @@ namespace UnitBattleGame.ViewModels
 
         public GameDeskViewModel()
         {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             var ground = new List<GameObject>();
             var units = new List<GameObject>();
             var firstPlayer = new Player(1, "Nastya", null);
             var secondPlayer = new Player(1, "Nadeha", null);
 
-            var sr = new StreamReader("InitField1.txt", Encoding.Default);
+            var sr = new StreamReader(configuration["InitFieldFile"], Encoding.Default);
 
             int rowNumber = 0;
             while(!sr.EndOfStream)

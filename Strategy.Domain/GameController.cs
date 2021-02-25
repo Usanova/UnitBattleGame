@@ -59,7 +59,7 @@ namespace Strategy.Domain
                 return false;
 
             var gameObject = _map.GetGameObjectByCoordinates(x, y);
-            if (gameObject != null && (gameObject is Water || gameObject is Unit))
+            if (gameObject != null && !gameObject.Earth)
                 return false;
 
             return true;

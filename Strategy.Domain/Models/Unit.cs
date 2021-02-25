@@ -12,7 +12,8 @@ namespace Strategy.Domain.Models
 {
     public abstract class Unit : GameObject
     {
-        protected Unit(int health, Player player, int x, int y): base(x, y)
+
+        protected Unit(int health, Player player, int x, int y) : base(x, y, false)
         {
             this.Health = health;
             Player = player;

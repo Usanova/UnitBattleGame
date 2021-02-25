@@ -8,7 +8,8 @@
         xmlns:baseWindowNs="clr-namespace:UnitBattleGame"
         xmlns:local="clr-namespace:UnitBattleGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="822" Width="788" x:Name="Desk" Background="#FFB1F0B1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="MainWindow" Height="842" Width="788" x:Name="Desk" Background="#FFB1F0B1" 
+                       WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <baseWindowNs:ViewBase.DataContext>
         <col:GameDeskViewModel/>
     </baseWindowNs:ViewBase.DataContext>
@@ -76,7 +77,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="0,8,0,0">
+        <StackPanel Grid.Row="1" Margin="0,8,0,0" Name="hg">
             <ListBox x:Name="l"></ListBox>
             <ItemsControl ItemsSource="{Binding TheGame}" x:Name="map" Height="653">
                 <ItemsControl.ItemsPanel>

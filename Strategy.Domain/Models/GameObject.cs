@@ -1,21 +1,16 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Strategy.Domain.Models
 {
     public abstract class GameObject : ReactiveObject
     {
-        protected GameObject(int x, int y)
+        protected GameObject(int x, int y, bool earth)
         {
             X = x;
             Y = y;
+            Earth = earth;
         }
 
         [Reactive] public int X { get; protected set; }
@@ -27,6 +22,8 @@ namespace Strategy.Domain.Models
         [Reactive] public bool IsMovingArea { get; set; }
 
         public abstract BitmapImage SourceFrom { get; }
+
+        public bool Earth { get; private set; }
 
         public void IsSelected(bool isSelected) => Selected = isSelected;
     }

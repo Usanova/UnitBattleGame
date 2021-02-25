@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using UnitBattleGame.ViewModels;
 
 namespace UnitBattleGame
 {
@@ -48,6 +49,9 @@ namespace UnitBattleGame
 
             var ViewBase = (ViewBase)Activator.CreateInstance(ViewBaseType);
             vm.Error = new Action<string>(ViewBase.ShowMessageError);
+
+            if (vm is GameDeskViewModel)
+                ((MainWindow)ViewBase).InitGameField(((GameDeskViewModel)vm).FieldSize); 
 
             ViewBase.DataContext = vm;
             return ViewBase;

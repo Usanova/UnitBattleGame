@@ -12,6 +12,8 @@ namespace Strategy.Domain.Models
 
         private Matrix unitMatrix = new Matrix();
 
+        private int filedSize;
+
         /// <inheritdoc />
         public Map(IReadOnlyList<GameObject> ground, IReadOnlyList<GameObject> units)
         {
@@ -22,6 +24,12 @@ namespace Strategy.Domain.Models
             if (units != null)
                 foreach (var gameObject in units)
                     unitMatrix[gameObject.X, gameObject.Y] = gameObject;
+        }
+
+        public Map(IReadOnlyList<GameObject> ground, IReadOnlyList<GameObject> units, int fieldSize) 
+            : this(ground, units)
+        {
+            this.filedSize = fieldSize;
         }
 
         public void Move(Unit unit, int x, int y)
@@ -49,10 +57,10 @@ namespace Strategy.Domain.Models
         private void ChangeMovingArea(Unit unit, bool isMovingArea)
         {
             for (int i = Math.Max(0, unit.X - unit.MaximumTravelDistance);
-                i <= Math.Min(19, unit.X + unit.MaximumTravelDistance); i++)
+                i <= Math.Min(filedSize - 1, unit.X + unit.MaximumTravelDistance); i++)
             {
                 for (int j = Math.Max(0, unit.Y - unit.MaximumTravelDistance);
-                j <= Math.Min(19, unit.Y + unit.MaximumTravelDistance); j++)
+                j <= Math.Min(filedSize - 1, unit.Y + unit.MaximumTravelDistance); j++)
                 {
                     if (i == unit.X && j == unit.Y)
                         continue;
@@ -62,8 +70,6 @@ namespace Strategy.Domain.Models
             }
         }
     }
-
-
 
     internal class Matrix
     {

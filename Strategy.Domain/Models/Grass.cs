@@ -11,7 +11,7 @@ namespace Strategy.Domain.Models
     /// </summary>
     public sealed class Grass : GameObject
     {
-        public Grass(int x, int y) : base(x, y) { }
+        public Grass(int x, int y) : base(x, y, true) { }
 
         public override BitmapImage SourceFrom
             => new BitmapImage(new Uri("Resources/Ground/Grass.png", UriKind.Relative));

@@ -9,7 +9,7 @@ namespace Strategy.Domain.Models
     /// </summary>
     public sealed class Water : GameObject
     {
-        public Water(int x, int y) : base(x, y) { }
+        public Water(int x, int y) : base(x, y, false) { }
 
         public override BitmapImage SourceFrom
             => new BitmapImage(new Uri("Resources/Ground/Water.png", UriKind.Relative));

@@ -26,4 +26,13 @@
     <Resource Include="Resources\Ground\Grass.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="InitField.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="InitField1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

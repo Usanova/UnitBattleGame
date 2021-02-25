@@ -24,5 +24,21 @@ namespace UnitBattleGame
         {
             InitializeComponent();
         }
+
+        public void InitGameField(int fieldSize)
+        {
+            var grid = new FrameworkElementFactory(typeof(Grid));
+           
+
+            for (int i = 0; i < fieldSize; i++)
+            {
+                var col = new FrameworkElementFactory(typeof(ColumnDefinition));
+                var row = new FrameworkElementFactory(typeof(RowDefinition));
+                grid.AppendChild(col);
+                grid.AppendChild(row);
+            }
+
+            map.ItemsPanel = new ItemsPanelTemplate(grid);
+        }
     }
 }

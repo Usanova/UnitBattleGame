@@ -9,41 +9,70 @@ using Strategy.Domain.Models;
 using DevExpress.Mvvm;
 using System.Collections.ObjectModel;
 using Strategy.Domain;
+using System.IO;
 
 namespace UnitBattleGame.ViewModels
 {
     public sealed class GameDeskViewModel : ViewModelBase
     {
+        public int FieldSize { get; set; }
+
         public GameDeskViewModel()
         {
             var ground = new List<GameObject>();
             var units = new List<GameObject>();
-
-            for (int i = 0; i < 20; i++)
-                for (int j = 0; j < 20; j++)
-                    if (i == 9 || i == 10 || (j != 9 && j != 10))
-                        AddToGamesAndList(new Grass(x: j, y: i) , ground);
-
-            for(int i = 0; i < 20; i++)
-                for(int j = 9; j <= 10; j++)
-                    if(i != 9 && i != 10)
-                        AddToGamesAndList(new Water(x: j, y: i), ground);
-
             var firstPlayer = new Player(1, "Nastya", null);
             var secondPlayer = new Player(1, "Nadeha", null);
 
-            AddToGamesAndList(new Archer(firstPlayer, x: 7, y: 2), units);
-            AddToGamesAndList(new Catapult(firstPlayer, x: 7, y: 6), units);
-            AddToGamesAndList(new Horseman(firstPlayer, x: 7, y: 13), units);
-            AddToGamesAndList(new Swordsman(firstPlayer, x: 7, y: 17), units);
+            var sr = new StreamReader("InitField1.txt", Encoding.Default);
+
+            int rowNumber = 0;
+            while(!sr.EndOfStream)
+            {
+                var gameObjectsString = sr.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                for(int columnNumber = 0; columnNumber < gameObjectsString.Length; columnNumber++)
+                {
+                    var currentPlayer = firstPlayer;
+                    if(columnNumber > gameObjectsString.Length/2)
+                        currentPlayer = secondPlayer;
+
+                    if(gameObjectsString[columnNumber] != "1")
+                        ground.Add(new Grass(x: columnNumber, y: rowNumber));
+
+                    switch (gameObjectsString[columnNumber])
+                    {
+                        case "1":
+                            ground.Add(new Water(x: columnNumber, y: rowNumber));
+                            break;
+                        case "2":
+                            units.Add(new Archer(currentPlayer, x: columnNumber, y: rowNumber));
+                            break;
+                        case "3":
+                            units.Add(new Catapult(currentPlayer, x: columnNumber, y: rowNumber));
+                            break;
+                        case "4":
+                            units.Add(new Horseman(currentPlayer, x: columnNumber, y: rowNumber));
+                            break;
+                        case "5":
+                            units.Add(new Swordsman(currentPlayer, x: columnNumber, y: rowNumber));
+                            break;
+                    }
+                }
+                rowNumber++;
+            }
+
+            sr.Close();
+
+            FieldSize = rowNumber;
+
+            foreach (var groundItem in ground)
+                TheGame.Add(groundItem);
+
+            foreach (var unit in units)
+                TheGame.Add(unit);
 
 
-            AddToGamesAndList(new Archer(secondPlayer, x: 12, y: 2), units);
-            AddToGamesAndList(new Catapult(secondPlayer, x: 12, y: 6), units);
-            AddToGamesAndList(new Horseman(secondPlayer, x: 12, y: 13), units);
-            AddToGamesAndList(new Swordsman(secondPlayer, x: 12, y: 17), units);
-
-            gameController = new GameController(new Map(ground, units), firstPlayer, secondPlayer);
+            gameController = new GameController(new Map(ground, units, FieldSize), firstPlayer, secondPlayer);
             gameController.PropertyChanged += (s, e) => 
             { 
                 this.RaisePropertyChanged(e.PropertyName);
@@ -60,12 +89,6 @@ namespace UnitBattleGame.ViewModels
                     this.RaisePropertyChanged("ExistDamage");
                 }
             };
-        }
-
-        private void AddToGamesAndList(GameObject gameObject, List<GameObject> list)
-        {
-            TheGame.Add(gameObject);
-            list.Add(gameObject);
         }
 
         GameController gameController;

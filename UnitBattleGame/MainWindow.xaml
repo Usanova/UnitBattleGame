@@ -8,7 +8,7 @@
         xmlns:baseWindowNs="clr-namespace:UnitBattleGame"
         xmlns:local="clr-namespace:UnitBattleGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="842" Width="788" x:Name="Desk" Background="#FFB1F0B1" 
+        Title="UnitGame" Height="842" Width="788" x:Name="Desk" Background="#FFB1F0B1" 
                        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <baseWindowNs:ViewBase.DataContext>
         <col:GameDeskViewModel/>
